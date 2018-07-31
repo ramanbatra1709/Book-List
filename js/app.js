@@ -1,37 +1,36 @@
-function Book(title, author, isbn)  {
-    this.title = title;
-    this.author = author;
-    this.isbn = isbn;
+class Book  {
+    constructor(title, author, isbn)    {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
 }
 
-function UI()   {}
-
-UI.prototype.addBookToList = function(book) {
-    const table = document.querySelector('#book-list');
-    const row = document.createElement('tr');
-    row.innerHTML = `<td>${book.title}</td><td>${book.author}</td><td>${book.isbn}</td><td><a href="#" class="delete">x</a></td>`;
-    table.appendChild(row);
-}
-
-UI.prototype.clearInputs = function()   {
-    document.querySelector('#title').value = '';
-    document.querySelector('#author').value = '';
-    document.querySelector('#isbn').value = '';
-}
-
-UI.prototype.showAlert = function(message, className) {
-    const newDiv = document.createElement('div');
-    newDiv.className = `alert ${className}`;
-    newDiv.appendChild(document.createTextNode(message));
-    document.querySelector('.container').insertBefore(newDiv, document.querySelector('#book-form'));
-    setTimeout(function()   {
-        document.querySelector('.alert').remove();
-    }, 5000);
-}
-
-UI.prototype.deleteBook = function(element)    {
-    if (element.className === 'delete' && confirm('Are you sure?')) {
-        element.parentElement.parentElement.remove();
+class UI    {
+    addBookToList(book) {
+        const table = document.querySelector('#book-list');
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${book.title}</td><td>${book.author}</td><td>${book.isbn}</td><td><a href="#" class="delete">x</a></td>`;
+        table.appendChild(row);
+    }
+    showAlert(message, className) {
+        const newDiv = document.createElement('div');
+        newDiv.className = `alert ${className}`;
+        newDiv.appendChild(document.createTextNode(message));
+        document.querySelector('.container').insertBefore(newDiv, document.querySelector('#book-form'));
+        setTimeout(function()   {
+            document.querySelector('.alert').remove();
+        }, 5000);
+    }
+    deleteBook(element)    {
+        if (element.className === 'delete' && confirm('Are you sure?')) {
+            element.parentElement.parentElement.remove();
+        }
+    }
+    clearInputs()   {
+        document.querySelector('#title').value = '';
+        document.querySelector('#author').value = '';
+        document.querySelector('#isbn').value = '';
     }
 }
 
